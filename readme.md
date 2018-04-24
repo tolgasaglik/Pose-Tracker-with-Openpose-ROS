@@ -3,7 +3,6 @@
 [ ![License] [license-image] ] [license]
 
 [license-image]: http://img.shields.io/badge/license-Apache--2-blue.svg?style=flat
-[license]: LICENSE
 
 This repository aims to recognize gestures made by users. Recognized gestures can lead the robot to take certain actions and/or repeat user's movement.
 
@@ -34,17 +33,17 @@ Project uses following hardware:
 1. Intel Core-i7 6700HQ
 2. Nvidia Mobile Gtx 960
 3. RealSense SR300 (Firmware 3.10.10.0 and up)
-4. USB 3.0 Type-A Adapter for camera connection
+4. USB 3.0 Type-A port for camera connection
 
 
 ## Installation
 
 As the ROS will be main environment it needs to be installed first. You may switch between camera and openpose installation. However completing step 3 before 4 is vital to prevent kernel errors.
 
-1. Install [ROS Kinetic]: http://wiki.ros.org/kinetic/Installation/Ubuntu
-2. Install Openpose and Openpose_ROS node following instructions from [this link]: https://github.com/firephinx/openpose_ros
-3. Install Realsense Camera [Prerequisities]:http://wiki.ros.org/librealsense#Installation_Prerequisites
-4. Install Realsense Camera ROS Node from [source]:http://wiki.ros.org/realsense_camera/Tutorials/Building_librealsense_from_Sources
+1. Install ROS Kinetic: http://wiki.ros.org/kinetic/Installation/Ubuntu
+2. Install Openpose and OpenposeROS node following instructions from: https://github.com/firephinx/openpose_ros
+3. Install Realsense Camera Prerequisities: http://wiki.ros.org/librealsense#Installation_Prerequisites
+4. Install Realsense Camera ROS Node from source: http://wiki.ros.org/realsense_camera/Tutorials/Building_librealsense_from_Sources
 
 
 ## License
