@@ -1,9 +1,5 @@
 # Gesture Detector with Openpose Software on ROS Kinetic
 
-[ ![License] [license-image] ] [license]
-
-[license-image]: http://img.shields.io/badge/license-Apache--2-blue.svg?style=flat
-
 This repository aims to recognize gestures made by users. Recognized gestures can lead the robot to take certain actions and/or repeat user's movement.
 
 ## Table of Contents
@@ -24,7 +20,11 @@ This repository aims to recognize gestures made by users. Recognized gestures ca
 
 The library is written in standards-conforming Python. It is developed and tested on the following platforms:
 
-1. Ubuntu 16.04 LTS
+1. Ubuntu 16.04
+2. ROS Indigo / Kinetic
+3. CUDA 8.0
+4. cuDNN 5.1 / cuDNN 6.0
+5. OpenCV 3.3 / OpenCV 3.4
 
 
 ## Hardware Requirements
