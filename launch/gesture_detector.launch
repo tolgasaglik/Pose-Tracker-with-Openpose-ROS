@@ -1,5 +1,5 @@
 <launch>
-     <node pkg="gesture_detector" type="gesture_listener.py" name="gesture_listener" output="screen"/>
-     <include file="/home/robolab3/catkin_ws/src/openpose_ros-master/openpose_ros/launch/openpose_ros.launch" />
-     <include file="/home/robolab3/catkin_ws/src/realsense/realsense_camera/launch/sr300_nodelet_rgbd.launch" />
+    <node pkg="gesture_detector" type="gesture_listener.py" name="gesture_listener" output="screen"/>
+    <include file="$(find openpose_ros)/launch/openpose_ros.launch" />
+    <include file="$(find realsense_camera)/launch/sr300_nodelet_rgbd.launch" />
 </launch>
