@@ -21,7 +21,7 @@ This repository aims to recognize gestures made by users. Recognized gestures ca
 The library is written in standards-conforming Python. It is developed and tested on the following platforms:
 
 1. Ubuntu 16.04
-2. ROS Indigo / Kinetic
+2. ROS Kinetic
 3. CUDA 8.0
 4. cuDNN 5.1
 5. OpenCV 3.2
