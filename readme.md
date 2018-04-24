@@ -23,8 +23,8 @@ The library is written in standards-conforming Python. It is developed and teste
 1. Ubuntu 16.04
 2. ROS Indigo / Kinetic
 3. CUDA 8.0
-4. cuDNN 5.1 / cuDNN 6.0
-5. OpenCV 3.3 / OpenCV 3.4
+4. cuDNN 5.1
+5. OpenCV 3.2
 
 
 ## Hardware Requirements
