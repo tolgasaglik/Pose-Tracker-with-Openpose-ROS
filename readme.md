@@ -39,7 +39,7 @@ As the ROS will be main environment it needs to be installed first. You may swit
     
     http://wiki.ros.org/kinetic/Installation/Ubuntu
 
-2. Install Openpose and OpenposeROS node following instructions from
+2. Install Openpose and OpenposeROS node following instructions below.
 
     https://github.com/firephinx/openpose_ros
 
