@@ -35,17 +35,27 @@ Project uses following hardware:
 
 As the ROS will be main environment it needs to be installed first. You may switch between camera and openpose installation. However completing step 3 before 4 is vital to prevent kernel errors.
 
-1. Install ROS Kinetic: http://wiki.ros.org/kinetic/Installation/Ubuntu
-2. Install Openpose and OpenposeROS node following instructions from: https://github.com/firephinx/openpose_ros
+1. Install ROS Kinetic: 
+    
+    http://wiki.ros.org/kinetic/Installation/Ubuntu
+
+2. Install Openpose and OpenposeROS node following instructions from
+
+    https://github.com/firephinx/openpose_ros
 
 Unless you want to use a separate camera skip step 3 and 4
 
-3. Install Realsense Camera Prerequisities: http://wiki.ros.org/librealsense#Installation_Prerequisites
-4. Install Realsense Camera ROS Node from source: http://wiki.ros.org/realsense_camera/Tutorials/Building_librealsense_from_Sources
+3. Install Realsense Camera Prerequisities 
+    
+    http://wiki.ros.org/librealsense#Installation_Prerequisites
+
+4. Install Realsense Camera ROS Node from source 
+
+    http://wiki.ros.org/realsense_camera/Tutorials/Building_librealsense_from_Sources
 
 ## Installation
 
-1. Git clone the package => user:~/path-to-catkin-workspace/catkin_ws/src$
+1. Git clone the package user:~/path-to-catkin-workspace/catkin_ws/src$
 
     git clone https://github.com/tolgasaglik/Gesture-Recognition-with-Openpose-ROS.git
 
@@ -63,7 +73,7 @@ Skip step 2 if you have already initialized your workspace
 
     source devel/setup.bash
 
-5. Invoke the launcher. You may modify it if you want to use another camera etc. 
+5. Invoke the launcher. You may modify it if you want to use another camera.
 
     roslaunch $(find gesture_detector)/launch/gesture_detector.launch
 
