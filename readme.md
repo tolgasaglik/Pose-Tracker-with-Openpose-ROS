@@ -31,11 +31,11 @@ Project uses following hardware:
 4. USB 3.0 Type-A port for camera connection
 
 
-## Software Prerequisities
+## Software Prequisities
 
 As the ROS will be main environment it needs to be installed first. You may switch between camera and openpose installation. However completing step 3 before 4 is vital to prevent kernel errors.
 
-1. Install ROS Kinetic: 
+1. Install ROS Kinetic. 
     
     http://wiki.ros.org/kinetic/Installation/Ubuntu
 
@@ -43,39 +43,39 @@ As the ROS will be main environment it needs to be installed first. You may swit
 
     https://github.com/firephinx/openpose_ros
 
-Unless you want to use a separate camera skip step 3 and 4
+Unless you want to use a separate camera skip step 3 and 4.
 
-3. Install Realsense Camera Prerequisities 
+3. Install Realsense Camera Prerequisities. 
     
     http://wiki.ros.org/librealsense#Installation_Prerequisites
 
-4. Install Realsense Camera ROS Node from source 
+4. Install Realsense Camera ROS Node from source.
 
     http://wiki.ros.org/realsense_camera/Tutorials/Building_librealsense_from_Sources
 
 ## Installation
 
-1. Git clone the package user:~/path-to-catkin-workspace/catkin_ws/src$
+1. Git clone the package into catkin workspace src folder.
 
-    git clone https://github.com/tolgasaglik/Gesture-Recognition-with-Openpose-ROS.git
+    :~/path-to-catkin-workspace/catkin_ws/src$ git clone https://github.com/tolgasaglik/Gesture-Recognition-with-Openpose-ROS.git
 
-Skip step 2 if you have already initialized your workspace
+Skip step 2 if you have already initialized your workspace.
 
-2. Initialize your workspace user:~/catkin_ws$ 
+2. Initialize your workspace.
 
-    catkin_init_workspace 
+    :~/catkin_ws$ catkin_init_workspace 
 
-3. Build your package user:~/catkin_ws$ 
+3. Build your package.
 
-    catkin_make
+    :~/catkin_ws$ catkin_make
 
-4. Source you environment user:~/catkin_ws$ 
+4. Source you environment.
 
-    source devel/setup.bash
+    :~/catkin_ws$ source devel/setup.bash
 
 5. Invoke the launcher. You may modify it if you want to use another camera.
 
-    roslaunch $(find gesture_detector)/launch/gesture_detector.launch
+    :~/catkin_ws$ roslaunch $(find gesture_detector)/launch/gesture_detector.launch
 
 ## License
 
