@@ -39,6 +39,7 @@ As the ROS will be main environment it needs to be installed first. You may swit
 2. Install Openpose and OpenposeROS node following instructions from: https://github.com/firephinx/openpose_ros
 
 Unless you want to use a separate camera skip step 3 and 4
+
 3. Install Realsense Camera Prerequisities: http://wiki.ros.org/librealsense#Installation_Prerequisites
 4. Install Realsense Camera ROS Node from source: http://wiki.ros.org/realsense_camera/Tutorials/Building_librealsense_from_Sources
 
