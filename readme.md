@@ -49,6 +49,7 @@ Unless you want to use a separate camera skip step 3 and 4
     git clone https://github.com/tolgasaglik/Gesture-Recognition-with-Openpose-ROS.git
 
 Skip step 2 if you have already initialized your workspace
+
 2. Initialize your workspace user:~/catkin_ws$ 
 
     catkin_init_workspace 
