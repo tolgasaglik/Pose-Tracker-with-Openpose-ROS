@@ -26,6 +26,16 @@ C_RIGHT_EAR = 16
 C_LEFT_EAR = 17
 C_BACKGROUND = 18
 
+# FACE for QT
+F_ANGRY = "angry"
+F_BLINK = "blink"
+F_DISGUST = "disgust"
+F_FEAR = "fear"
+F_HAPPY = "happy"
+F_LOGO = "logo"
+F_SAD = "sad"
+F_SUPRISE = "suprise"
+
 # GESTURE CONSTANTS
 G_HAND_RAISE = 0
 G_WAIT_A_MINUTE = 1
@@ -51,6 +61,7 @@ class Gesture_Detector(object):
     """Gesture Detection Node on ROS using Openpose"""
     def __init__(self):
         self.pub = rospy.Publisher("/gesture_detector/gesture_list", GestureDetectorHumanList, queue_size=10)
+        self.pub2 = rospy.Publisher("/face_duration/setEmotion", String, queue_size=1)
         self.publisher_msg = GestureDetectorHumanList()
         """Initialize ROS components"""
         self.init_node()
@@ -118,6 +129,7 @@ class Gesture_Detector(object):
         i = 0
         detected_human_list = GestureDetectorHumanList()
         detected_human_list.num_humans = len(msg.human_list)
+        face_gesture = ""
 
         for human in msg.human_list:
 
@@ -129,26 +141,32 @@ class Gesture_Detector(object):
             if self.hand_raise(human):
                 # rospy.loginfo("Human:" + str(ind) + " is raising a HAND!")
                 detected_human.gesture = str(GS_HAND_RAISE)
+                face_gesture = F_HAPPY
 
             elif self.wait_a_minute(human):
                 # rospy.loginfo("Human:" + str(ind) + " tells PEPPER to wait!")
                 detected_human.gesture = str(GS_WAIT_A_MINUTE)
+                face_gesture = F_SAD
 
             elif self.break_activity(human):
                 # rospy.loginfo("Human:" + str(ind) + " tells PEPPER to break activity!")
                 detected_human.gesture = str(GS_BREAK_ACTIVITY)
+                face_gesture = F_ANGRY
 
             elif self.go_right(human):
                 # rospy.loginfo("Human:" + str(ind) + " tells PEPPER to go right!")
                 detected_human.gesture = str(GS_GO_RIGHT)
+                face_gesture = F_FEAR
 
             elif self.go_left(human):
                 # rospy.loginfo("Human:" + str(ind) + " tells PEPPER to go left!")
                 detected_human.gesture = str(GS_GO_LEFT)
+                face_gesture = F_FEAR
 
             elif self.reach_up(human):
                 # rospy.loginfo("Human:" + str(ind) + " is reaching reach up!")
                 detected_human.gesture = str(GS_REACH_UP)
+                face_gesture = F_DISGUST
 
             elif self.lateral_right_bend(human):
                 # rospy.loginfo("Human:" + str(ind) + " is bending right!")
@@ -167,6 +185,7 @@ class Gesture_Detector(object):
             # rospy.loginfo(self.publisher_msg.gesture_list)
 
         self.pub.publish(detected_human_list)
+        self.pub2.publish(face_gesture)
 
     def gesture_detector(self):
         rospy.init_node("gesture_detector", anonymous=True)
