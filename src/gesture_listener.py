@@ -62,10 +62,12 @@ class Gesture_Detector(object):
 
     """Gesture Recognizers"""
     def hand_raise(self, human):
-        return (((human.body_key_points_with_prob[C_LEFT_SHOULDER].y > human.body_key_points_with_prob[C_LEFT_WRIST].y > 0)
+        return ((((human.body_key_points_with_prob[C_LEFT_SHOULDER].y > human.body_key_points_with_prob[C_LEFT_WRIST].y > 0)
                  or (human.body_key_points_with_prob[C_RIGHT_SHOULDER].y > human.body_key_points_with_prob[C_RIGHT_WRIST].y > 0))
                 and not ((human.body_key_points_with_prob[C_LEFT_SHOULDER].y > human.body_key_points_with_prob[C_LEFT_WRIST].y > 0)
                          and (human.body_key_points_with_prob[C_RIGHT_SHOULDER].y > human.body_key_points_with_prob[C_RIGHT_WRIST].y > 0)))
+                and ((human.body_key_points_with_prob[C_RIGHT_SHOULDER].x > human.body_key_points_with_prob[C_RIGHT_WRIST].x > 0) 
+                    or (human.body_key_points_with_prob[C_LEFT_WRIST].x > human.body_key_points_with_prob[C_LEFT_SHOULDER].x > 0)))
 
     def wait_a_minute(self, human):
         return ((human.body_key_points_with_prob[C_RIGHT_ELBOW].y > human.body_key_points_with_prob[C_RIGHT_SHOULDER].y > human.body_key_points_with_prob[C_RIGHT_WRIST].y > 0)
@@ -76,8 +78,8 @@ class Gesture_Detector(object):
     def break_activity(self, human):
         return ((human.body_key_points_with_prob[C_LEFT_SHOULDER].x > human.body_key_points_with_prob[C_LEFT_WRIST].x > human.body_key_points_with_prob[C_RIGHT_SHOULDER].x > 0)
                 and (human.body_key_points_with_prob[C_LEFT_SHOULDER].x > human.body_key_points_with_prob[C_RIGHT_WRIST].x > human.body_key_points_with_prob[C_RIGHT_SHOULDER].x > 0)
-                and (0 < human.body_key_points_with_prob[C_RIGHT_SHOULDER].y < human.body_key_points_with_prob[C_RIGHT_WRIST].y < human.body_key_points_with_prob[C_RIGHT_ELBOW].y)
-                and (0 < human.body_key_points_with_prob[C_LEFT_SHOULDER].y < human.body_key_points_with_prob[C_LEFT_WRIST].y < human.body_key_points_with_prob[C_LEFT_ELBOW].y))
+                and (0 < human.body_key_points_with_prob[C_NOSE].y < human.body_key_points_with_prob[C_RIGHT_WRIST].y < human.body_key_points_with_prob[C_RIGHT_ELBOW].y)
+                and (0 < human.body_key_points_with_prob[C_NOSE].y < human.body_key_points_with_prob[C_LEFT_WRIST].y < human.body_key_points_with_prob[C_LEFT_ELBOW].y))
 
     def go_right(self, human):
         return ((0 < human.body_key_points_with_prob[C_NECK].x < human.body_key_points_with_prob[C_RIGHT_WRIST].x)
