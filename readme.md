@@ -85,4 +85,4 @@ Unless otherwise noted, gesture_detector repository is licensed under a BSD lice
 
 This is a non-exhaustive list of contributors:
 
-FranLera
+* FranLera
