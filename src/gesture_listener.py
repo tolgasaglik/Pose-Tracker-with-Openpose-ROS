@@ -60,7 +60,9 @@ GS_BEND_LEFT = "BEND_LEFT"
 class Gesture_Detector(object):
     """Gesture Detection Node on ROS using Openpose"""
     def __init__(self):
+        # Publisher for user gestures
         self.pub = rospy.Publisher("/gesture_detector/gesture_list", GestureDetectorHumanList, queue_size=10)
+        # Publisher for QT robot
         self.pub2 = rospy.Publisher("/face_duration/setEmotion", String, queue_size=1)
         self.publisher_msg = GestureDetectorHumanList()
         """Initialize ROS components"""
@@ -78,7 +80,11 @@ class Gesture_Detector(object):
                 and not ((human.body_key_points_with_prob[C_LEFT_SHOULDER].y > human.body_key_points_with_prob[C_LEFT_WRIST].y > 0)
                          and (human.body_key_points_with_prob[C_RIGHT_SHOULDER].y > human.body_key_points_with_prob[C_RIGHT_WRIST].y > 0)))
                 and ((human.body_key_points_with_prob[C_RIGHT_SHOULDER].x > human.body_key_points_with_prob[C_RIGHT_WRIST].x > 0) 
-                    or (human.body_key_points_with_prob[C_LEFT_WRIST].x > human.body_key_points_with_prob[C_LEFT_SHOULDER].x > 0)))
+                    or (human.body_key_points_with_prob[C_LEFT_WRIST].x > human.body_key_points_with_prob[C_LEFT_SHOULDER].x > 0))
+                and ((abs(human.body_key_points_with_prob[C_RIGHT_WRIST].x - human.body_key_points_with_prob[C_RIGHT_ELBOW].x) < 30) 
+                    or (abs(human.body_key_points_with_prob[C_LEFT_WRIST].x - human.body_key_points_with_prob[C_LEFT_ELBOW].x) < 30))
+                and not (0 < human.body_key_points_with_prob[C_LEFT_WRIST].x < human.body_key_points_with_prob[C_NECK].x) 
+                and not (0 < human.body_key_points_with_prob[C_NECK].x < human.body_key_points_with_prob[C_RIGHT_WRIST].x))
 
     def wait_a_minute(self, human):
         return ((human.body_key_points_with_prob[C_RIGHT_ELBOW].y > human.body_key_points_with_prob[C_RIGHT_SHOULDER].y > human.body_key_points_with_prob[C_RIGHT_WRIST].y > 0)
@@ -156,17 +162,17 @@ class Gesture_Detector(object):
             elif self.go_right(human):
                 # rospy.loginfo("Human:" + str(ind) + " tells PEPPER to go right!")
                 detected_human.gesture = str(GS_GO_RIGHT)
-                face_gesture = F_FEAR
+                face_gesture = F_DISGUST
 
             elif self.go_left(human):
                 # rospy.loginfo("Human:" + str(ind) + " tells PEPPER to go left!")
                 detected_human.gesture = str(GS_GO_LEFT)
-                face_gesture = F_FEAR
+                face_gesture = F_DISGUST
 
             elif self.reach_up(human):
                 # rospy.loginfo("Human:" + str(ind) + " is reaching reach up!")
                 detected_human.gesture = str(GS_REACH_UP)
-                face_gesture = F_DISGUST
+                face_gesture = F_FEAR
 
             elif self.lateral_right_bend(human):
                 # rospy.loginfo("Human:" + str(ind) + " is bending right!")
