@@ -12,7 +12,7 @@ This repository aims to recognize gestures made by users. Recognized gestures ca
 
 ## Compatible Platforms
 
-The library is written in standards-conforming Python. It is developed and tested on the following platforms:
+This repository is written in standards-conforming Python. It is developed and tested on the following platforms:
 
 1. Ubuntu 16.04
 2. ROS Kinetic
@@ -45,8 +45,8 @@ As the ROS will be main environment it needs to be installed first. You may swit
 
 Unless you want to use a separate camera skip step 3 and 4.
 
-3. Install Realsense Camera Prerequisities. 
-    
+3. Install Realsense Camera Prerequisities.
+
     http://wiki.ros.org/librealsense#Installation_Prerequisites
 
 4. Install Realsense Camera ROS Node from source.
