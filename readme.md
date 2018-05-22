@@ -18,7 +18,7 @@ This repository is written in standards-conforming Python. It is developed and t
 2. ROS Kinetic
 3. Openpose Software
 4. CUDA 8.0
-5. OpenCV 3.2
+5. OpenCV 3.2+
 6. Librealsense SDK 2.10.0+
 
 
@@ -27,7 +27,7 @@ Project uses following hardware:
 
 1. Intel Core-i7 6700HQ
 2. Nvidia Mobile Gtx 960
-3. RealSense SR300 (Firmware 3.10.10.0 and up)
+3. RealSense SR300 (Firmware 3.10.10.0+)
 4. USB 3.0 Type-A port for camera connection
 
 
@@ -59,14 +59,15 @@ Unless you want to use a separate camera skip step 3 and 4.
 
     :~/path-to-catkin-workspace/catkin_ws/src$ git clone https://github.com/tolgasaglik/Gesture-Recognition-with-Openpose-ROS.git
 
-Skip step 2 if you have already initialized your workspace.
+2. Go into the project folder and initialize your workspace.
 
-2. Initialize your workspace.
-
-    :~/catkin_ws$ catkin_init_workspace 
+    :~/catkin_ws$ cd src/gesture_detector
+    :~/catkin_ws/src/gesture_detector$ catkin_init_workspace
 
 3. Build your package.
 
+    :~/catkin_ws/src/gesture_detector$ cd ..
+    :~/catkin_ws/src$ cd ..
     :~/catkin_ws$ catkin_make
 
 4. Source you environment.

@@ -27,14 +27,16 @@ C_LEFT_EAR = 17
 C_BACKGROUND = 18
 
 # FACE for QT
-F_ANGRY = "angry"
-F_BLINK = "blink"
-F_DISGUST = "disgust"
-F_FEAR = "fear"
-F_HAPPY = "happy"
+F_YAWN = "ava_yawn"
+F_ANGRY = "ava_angry"
+F_BLINK = "ava_blink"
+F_DISGUST = "ava_disgust"
+F_FEAR = "ava_afraid"
+F_HAPPY = "ava_happy_blinking"
 F_LOGO = "logo"
-F_SAD = "sad"
-F_SUPRISE = "suprise"
+F_SAD = "ava_sad"
+F_SUPRISE = "ava_suprise"
+F_CONFUSED = "ava_confused"
 
 # GESTURE CONSTANTS
 G_HAND_RAISE = 0
@@ -47,7 +49,7 @@ G_BEND_RIGHT = 6
 G_BEND_LEFT = 7
 
 # GESTURE CONSTANTS STRINGS
-GS_HAND_RAISE = "HAND"
+GS_HAND_RAISE = "RAISING A HAND"
 GS_WAIT_A_MINUTE = "STOP"
 GS_BREAK_ACTIVITY = "BREAK"
 GS_GO_RIGHT = "RIGHT"
@@ -81,10 +83,8 @@ class Gesture_Detector(object):
                          and (human.body_key_points_with_prob[C_RIGHT_SHOULDER].y > human.body_key_points_with_prob[C_RIGHT_WRIST].y > 0)))
                 and ((human.body_key_points_with_prob[C_RIGHT_SHOULDER].x > human.body_key_points_with_prob[C_RIGHT_WRIST].x > 0) 
                     or (human.body_key_points_with_prob[C_LEFT_WRIST].x > human.body_key_points_with_prob[C_LEFT_SHOULDER].x > 0))
-                and ((abs(human.body_key_points_with_prob[C_RIGHT_WRIST].x - human.body_key_points_with_prob[C_RIGHT_ELBOW].x) < 30) 
-                    or (abs(human.body_key_points_with_prob[C_LEFT_WRIST].x - human.body_key_points_with_prob[C_LEFT_ELBOW].x) < 30))
-                and not (0 < human.body_key_points_with_prob[C_LEFT_WRIST].x < human.body_key_points_with_prob[C_NECK].x) 
-                and not (0 < human.body_key_points_with_prob[C_NECK].x < human.body_key_points_with_prob[C_RIGHT_WRIST].x))
+                and ((abs(human.body_key_points_with_prob[C_RIGHT_WRIST].x - human.body_key_points_with_prob[C_RIGHT_ELBOW].x) < 100) 
+                    or (abs(human.body_key_points_with_prob[C_LEFT_WRIST].x - human.body_key_points_with_prob[C_LEFT_ELBOW].x) < 100)))
 
     def wait_a_minute(self, human):
         return ((human.body_key_points_with_prob[C_RIGHT_ELBOW].y > human.body_key_points_with_prob[C_RIGHT_SHOULDER].y > human.body_key_points_with_prob[C_RIGHT_WRIST].y > 0)
@@ -138,13 +138,22 @@ class Gesture_Detector(object):
         face_gesture = ""
 
         for human in msg.human_list:
-
             detected_human = GestureDetectorHuman()
             detected_human.human_index = i
             rospy.loginfo("Gesture from Human: " + str(i))
 
             # Check gesture published by current human and publish respective message
-            if self.hand_raise(human):
+            if self.go_right(human):
+                # rospy.loginfo("Human:" + str(ind) + " tells PEPPER to go right!")
+                detected_human.gesture = str(GS_GO_RIGHT)
+                face_gesture = F_DISGUST
+
+            elif self.go_left(human):
+                # rospy.loginfo("Human:" + str(ind) + " tells PEPPER to go left!")
+                detected_human.gesture = str(GS_GO_LEFT)
+                face_gesture = F_DISGUST
+
+            elif self.hand_raise(human):
                 # rospy.loginfo("Human:" + str(ind) + " is raising a HAND!")
                 detected_human.gesture = str(GS_HAND_RAISE)
                 face_gesture = F_HAPPY
@@ -159,28 +168,20 @@ class Gesture_Detector(object):
                 detected_human.gesture = str(GS_BREAK_ACTIVITY)
                 face_gesture = F_ANGRY
 
-            elif self.go_right(human):
-                # rospy.loginfo("Human:" + str(ind) + " tells PEPPER to go right!")
-                detected_human.gesture = str(GS_GO_RIGHT)
-                face_gesture = F_DISGUST
-
-            elif self.go_left(human):
-                # rospy.loginfo("Human:" + str(ind) + " tells PEPPER to go left!")
-                detected_human.gesture = str(GS_GO_LEFT)
-                face_gesture = F_DISGUST
-
             elif self.reach_up(human):
                 # rospy.loginfo("Human:" + str(ind) + " is reaching reach up!")
                 detected_human.gesture = str(GS_REACH_UP)
-                face_gesture = F_FEAR
+                face_gesture = F_CONFUSED
 
             elif self.lateral_right_bend(human):
                 # rospy.loginfo("Human:" + str(ind) + " is bending right!")
                 detected_human.gesture = str(GS_BEND_RIGHT)
+                face_gesture = F_YAWN
 
             elif self.lateral_left_bend(human):
                 # rospy.loginfo("Human:" + str(ind) + " is bending left!")
-                detected_human.gesture = str(GS_BEND_RIGHT)
+                detected_human.gesture = str(GS_BEND_LEFT)
+                face_gesture = F_YAWN
 
             detected_human_list.gesture_list.append(detected_human)
             i += 1

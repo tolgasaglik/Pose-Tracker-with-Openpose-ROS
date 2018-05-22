@@ -32,9 +32,9 @@ F_ANGRY = "angry"
 F_BLINK = "blink"
 F_DISGUST = "disgust"
 F_FEAR = "fear"
-F_HAPPY = "happy"
+F_HAPPY = "ava_happy"
 F_LOGO = "logo"
-F_SAD = "sad"
+F_SAD = "ava_sad"
 F_SUPRISE = "suprise"
 
 
@@ -67,7 +67,9 @@ class Pose_Tracker(object):
             (human.body_key_points_with_prob[C_RIGHT_EAR].x == 0 and human.body_key_points_with_prob[C_RIGHT_EAR].y == 0) 
             or (human.body_key_points_with_prob[C_LEFT_EAR].x == 0 and human.body_key_points_with_prob[C_LEFT_EAR].y == 0)
             or (human.body_key_points_with_prob[C_NECK].y - human.body_key_points_with_prob[C_NOSE].y < 100) 
-            or (human.body_key_points_with_prob[C_NECK].y - human.body_key_points_with_prob[C_NOSE].y > 150))
+            or (human.body_key_points_with_prob[C_NECK].y - human.body_key_points_with_prob[C_NOSE].y > 150)
+            or (0 < human.body_key_points_with_prob[C_LEFT_SHOULDER].x < human.body_key_points_with_prob[C_RIGHT_SHOULDER].x)
+        )
     
 
     """Operational Functions """
@@ -80,11 +82,11 @@ class Pose_Tracker(object):
         for human in msg.human_list:
             # Check gesture published by current human and publish respective message
             if self.isFaceDistracted(human):
-                rospy.loginfo("Human:" + str(i) + " is NOT looking!")
+                rospy.loginfo("Human:" + str(i) + " is NOT looking! :-(")
                 face_gesture = F_SAD
                 self.elapsed_idle_time += time.time() - self.previous_timestamp
             else:
-                rospy.loginfo("Human:" + str(i) + " is looking!")
+                rospy.loginfo("Human:" + str(i) + " is looking :-)")
                 face_gesture = F_HAPPY
                 self.elapsed_contact_time += time.time() - self.previous_timestamp
 
@@ -102,7 +104,7 @@ class Pose_Tracker(object):
 
             self.previous_timestamp = time.time()
 
-        #self.pub.publish(interaction_details)
+        # self.pub.publish(interaction_details)
         self.pub2.publish(face_gesture)
 
 

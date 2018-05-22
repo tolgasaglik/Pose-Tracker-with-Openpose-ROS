@@ -1,5 +1,5 @@
 <launch>
     <node pkg="gesture_detector" type="gesture_listener.py" name="gesture_listener" output="screen"/>
     <include file="$(find openpose_ros)/launch/openpose_ros.launch" />
-    <include file="$(find realsense_camera)/launch/sr300_nodelet_rgbd.launch" />
+    <include file="$(find realsense2_camera)/launch/rs_camera.launch" />
 </launch>
