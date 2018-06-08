@@ -206,8 +206,7 @@ class Gesture_Detector(object):
 
 if __name__ == '__main__':
     try:
-        rospy.loginfo("Starting ....")
+        rospy.loginfo("Starting ...")
         node = Gesture_Detector()
-        node.init_node()
     except rospy.ROSInterruptException:
         pass
