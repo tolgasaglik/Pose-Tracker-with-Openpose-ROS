@@ -57,26 +57,26 @@ Unless you want to use a separate camera skip step 3 and 4.
 
 1. Git clone the package into catkin workspace src folder.
 
-    :~/path-to-catkin-workspace/catkin_ws/src$ git clone https://github.com/tolgasaglik/Gesture-Recognition-with-Openpose-ROS.git
+    cd ~/catkin_ws
+    git clone https://github.com/tolgasaglik/Gesture-Recognition-with-Openpose-ROS.git
 
 2. Go into the project folder and initialize your workspace.
 
-    :~/catkin_ws$ cd src/gesture_detector
-    :~/catkin_ws/src/gesture_detector$ catkin_init_workspace
+    cd src/gesture_detector
+    catkin_init_workspace
 
 3. Build your package.
 
-    :~/catkin_ws/src/gesture_detector$ cd ..
-    :~/catkin_ws/src$ cd ..
-    :~/catkin_ws$ catkin_make
+    cd ~/catkin_ws
+    catkin_make
 
 4. Source you environment.
 
-    :~/catkin_ws$ source devel/setup.bash
+    source devel/setup.bash
 
 5. Invoke the launcher. You may modify it if you want to use another camera.
 
-    :~/catkin_ws$ roslaunch $(find gesture_detector)/launch/gesture_detector.launch
+    roslaunch $(find gesture_detector)/launch/gesture_detector.launch
 
 ## License
 
